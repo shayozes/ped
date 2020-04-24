@@ -1,28 +1,61 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-content class="indigo lighten-4">
+      <v-container fluid fill-height>
+        <v-layout row fill-height>
+          <v-flex md2 flex-grow-0>
+            <Sidenav :menuItems="boxes"/>
+          </v-flex>
+          <v-flex md10>
+            <MainContent/>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import moment from 'moment';
+import Sidenav from './components/Sidenav.vue';
+import MainContent from './components/MainContent.vue';
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
-    HelloWorld,
+    MainContent,
+    Sidenav,
   },
+  created() {
+    moment.locale('he');
+  },
+  data: () => ({
+    boxes: [
+      {
+        id: 'Inbox',
+        name: 'דואר נכנס',
+        showExtraContent: true,
+      },
+      {
+        id: 'Outbox',
+        name: 'דואר יוצא',
+        showExtraContent: true,
+      },
+      {
+        id: 'JunkEmail',
+        name: 'דואר זבל',
+        showExtraContent: false,
+      },
+      {
+        id: 'NewMailForm',
+        name: 'שלח מייל',
+        showExtraContent: false,
+      },
+    ],
+  }),
 };
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped>
+
 </style>
